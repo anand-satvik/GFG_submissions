@@ -14,7 +14,8 @@ class Solution{
     vector<int> help_classmate(vector<int> arr, int n) 
     { 
         // Your code goes here
-        stack<int> st;vector<int> res(n,0);
+        vector<int> nge(n,0);
+        stack<int> st;
         for(int i=n-1;i>=0;i--)
         {
             while(!st.empty()&&st.top()>=arr[i])
@@ -22,12 +23,12 @@ class Solution{
                 st.pop();
             }
             if(st.empty())
-            res[i]=-1;
+            nge[i]=-1;
             else
-            res[i]=st.top();
+            nge[i]=st.top();
             st.push(arr[i]);
         }
-        return res;
+        return nge;
     } 
 };
 
