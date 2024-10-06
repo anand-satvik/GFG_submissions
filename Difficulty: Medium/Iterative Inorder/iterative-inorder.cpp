@@ -100,26 +100,58 @@ public:
     {
         //code here
         vector<int> ans;
-        stack<Node*> st;
-        while(true)
+        Node* cur=root;
+        while(cur)
         {
-            if(root!=NULL)
+            if(cur->left==NULL)
             {
-                st.push(root);
-                root=root->left;
+                ans.push_back(cur->data);
+                cur=cur->right;
             }
             else
             {
-                if(st.empty())break;
+                Node* prev=cur->left;
+                while(prev->right!=NULL&&prev->right!=cur)
+                {
+                    prev=prev->right;
+                }
+                if(prev->right==NULL)
+                {
+                    prev->right=cur;
+                    cur=cur->left;
+                }
                 else
                 {
-                    root=st.top();
-                    st.pop();
-                    ans.push_back(root->data);
-                    root=root->right;
+                    prev->right=NULL;
+                    ans.push_back(cur->data);
+                    cur=cur->right;
                 }
             }
         }
+        
+        
+        
+        
+        // stack<Node*> st;
+        // while(true)
+        // {
+        //     if(root!=NULL)
+        //     {
+        //         st.push(root);
+        //         root=root->left;
+        //     }
+        //     else
+        //     {
+        //         if(st.empty())break;
+        //         else
+        //         {
+        //             root=st.top();
+        //             st.pop();
+        //             ans.push_back(root->data);
+        //             root=root->right;
+        //         }
+        //     }
+        // }
         return ans;
     }
 };
